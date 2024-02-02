@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Devoluciones</title>
+    <link rel="stylesheet" href="static/bootstrap-5.3.0-alpha1-dist/resources/css/app.css">
+    <script type="module" src="static/bootstrap-5.3.0-alpha1-dist/resources/js/app.js" defer></script>
+    <link rel="stylesheet" href="static/bootstrap-5.3.0-alpha1-dist/resources/css/Bienvenido.css">
+    <script type="module" src="static/bootstrap-5.3.0-alpha1-dist/resources/js/Bienvenido.js" defer></script>
+</head>
+
+<body class="bodyDevolucion" style="background-image: url('/Images/3d-illustration-advanced-mobile-microprocessor-600nw-2154798885.webp')">
+    {% include 'partials/nav.html' %}
+    <div class="container divPrincipal">
+        <h2>Registro de Entregas</h2>
+
+        <!-- Formulario para ingresar la fecha de entrega, ID de salida y ID de equipo -->
+        <form action="" method="post">
+            
+            <div class="form-group">
+                <label for="fechaEntrega">Fecha de Entrega:</label>
+                <input type="date" class="form-control" id="fechaEntrega" name="fechaEntregaDetalleSalida">
+            </div>
+            <div class="form-group">
+                <label for="idSalida">ID de Salida:</label>
+                <select class="form-control" name="fidSalida">
+                    <option value="">seleccione</option>
+                    {% for losprestamos in elprestamo %}
+                        <option value="{{ losprestamos.idSalida }}">{{ losprestamos.idSalida }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="idEquipo">ID de Equipo:</label>
+                <select class="form-control" name="fidequipo">
+                    <option value="">seleccione</option>
+                    {% for losequipo in elequipo %}
+                        <option value="{{ losequipo.idequipo }}">{{ losequipo.idequipo }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-primary" name="faccion" value="insertar">Guardar</button>
+
+        </form>
+        <br>
+        <br>
+        <!-- Tabla para listar las entregas -->
+        <h3>Lista de Entregas</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID Entrega</th>
+                    <th>Fecha de Entrega</th>
+                    <th>ID de Salida</th>
+                    <th>ID de Equipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for devoluciones1 in devolucion1 %}
+                    <tr>
+                        <td>{{ devoluciones1.idDetalleSalida }}</td>
+                        <td>{{ devoluciones1.fechaEntregaDetalleSalida }}</td>
+                        <td>{{ devoluciones1.idSalida }}</td>
+                        <td>{{ devoluciones1.idequipo }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

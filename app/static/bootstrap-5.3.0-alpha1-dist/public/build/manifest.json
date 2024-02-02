@@ -1,0 +1,22 @@
+{
+  "resources/css/Bienvenido.css": {
+    "file": "assets/Bienvenido-5e6bab71.css",
+    "isEntry": true,
+    "src": "resources/css/Bienvenido.css"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-4a9af003.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/js/Bienvenido.js": {
+    "file": "assets/Bienvenido-4ed993c7.js",
+    "isEntry": true,
+    "src": "resources/js/Bienvenido.js"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-453c27e6.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}

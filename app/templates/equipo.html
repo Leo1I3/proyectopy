@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>equipo</title>
+    <link rel="stylesheet" href="static/bootstrap-5.3.0-alpha1-dist/resources/css/app.css">
+    <script type="module" src="static/bootstrap-5.3.0-alpha1-dist/resources/js/app.js" defer></script>
+    <link rel="stylesheet" href="static/bootstrap-5.3.0-alpha1-dist/resources/css/Bienvenido.css">
+    <script type="module" src="static/bootstrap-5.3.0-alpha1-dist/resources/js/Bienvenido.js" defer></script>
+    
+</head>
+
+<body>
+    {% include 'partials/nav.html' %}
+
+    <div class="container divPrincipal mt-5">
+        <h1>Registro de Computadoras </h1>
+
+        <form action="{{ url_for('equipo.add') }}" method="post">
+            
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="idEquipo" name="equipo">
+                <label for="marca">Marca:</label>
+                <input type="text" class="form-control" id="marca" placeholder="Ingrese la marca" name="marcaE">
+            </div>
+            <div class="form-group">
+                <label for="modelo">Codigo:</label>
+                <input type="text" class="form-control" id="codigo" placeholder="Ingrese el codigo" name="codigoE">
+            </div>
+            <div class="form-group">
+                <label for="serial">Color:</label>
+                <input type="text" class="form-control" id="color" placeholder="Ingrese el color" name="colorE">
+            </div>
+            <div class="form-group">
+                <label for="serial">Descripcion:</label>
+                <input type="text" class="form-control" id="serial"
+                    placeholder="Ingrese una descripcion de el equipo" name="despE">
+            </div>
+            <div class="form-group">
+                <label for="serial">Estado:</label>
+                <div>
+                    <div><input name="estadoE" type="radio" value="1">Prestado</div>
+                    <div><input name="estadoE" type="radio" value="0">No prestado</div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" name="faccion" value="insertar">Registrar</button>
+        </form>
+
+        <h3>Lista de Equipos</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID equipo</th>
+                    <th>marca</th>
+                    <th>codigo</th>
+                    <th>color</th>
+                    <th>descripcion</th>
+                    <th>estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for equipo in data %}
+                    <tr>
+                        <td>{{ equipo.idequipo }}</td>
+                        <td>{{ equipo.marcaE }}</td>
+                        <td>{{ equipo.codigoE }}</td>
+                        <td>{{ equipo.colorE }}</td>
+                        <td>{{ equipo.despE }}</td>
+                        <td>
+                            {% if equipo.estadoE %}
+                                Prestado
+                            {% else %}
+                                No prestado
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
