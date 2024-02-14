@@ -1,10 +1,10 @@
 from flask import Blueprint, request, render_template
 from app import db
-from app.models import Administrador
+from app.models.administrador import Administrador
 
 bp = Blueprint('administrador', __name__)
 
-@bp.route('/')
+@bp.route('/', methods=['GET', 'POST'])
 def index():
     data = Administrador.query.all()
     return render_template("welcome.html", data=data)
@@ -12,16 +12,16 @@ def index():
 @bp.route('/add', methods=['POST'])
 def add():
     try:
-        data = request.get_json()
-        new_admin = Administrador(
-            cedulaAdministrador=data['cedulaAdministrador'],
-            nombreAdministrador=data['nombreAdministrador'],
-            AprellidoAdministrador=data['AprellidoAdministrador'],
-            telefonoAdministrador=data['telefonoAdministrador']
-        )
+        cedulaAdministrador=request.form.get('cedulaAdministrador')
+        nombreAdministrador=request.form.get('nombreAdministrador')
+        AprellidoAdministrador=request.form.get('AprellidoAdministrador')
+        telefonoAdministrador=request.form.get('telefonoAdministrador')
+        contraseña=request.form.get('contraseña')
+        
+        new_admin = Administrador(cedulaAdministrador=cedulaAdministrador,nombreAdministrador=nombreAdministrador,AprellidoAdministrador=AprellidoAdministrador,telefonoAdministrador=telefonoAdministrador,contraseña=contraseña)
         db.session.add(new_admin)
         db.session.commit()
-        return "Admin agregado correctamente", 201
+        return render_template("welcome.html")
     except Exception as e:
         db.session.rollback()
         return f"Error al agregar administrador: {str(e)}", 500
@@ -29,15 +29,17 @@ def add():
 @bp.route('/edit/<int:id>', methods=['PUT'])
 def edit(id):
     try:
-        data = request.get_json()
         admin = db.session.query(Administrador).get(id)
         if admin:
-            admin.cedulaAdministrador = data['cedulaAdministrador']
-            admin.nombreAdministrador = data['nombreAdministrador']
-            admin.AprellidoAdministrador = data['AprellidoAdministrador']
-            admin.telefonoAdministrador = data['telefonoAdministrador']
+            cedulaAdministrador=request.form.get('cedulaAdministrador')
+            nombreAdministrador=request.form.get('nombreAdministrador')
+            AprellidoAdministrador=request.form.get('AprellidoAdministrador')
+            telefonoAdministrador=request.form.get('telefonoAdministrador')
+            contraseña=request.form.get('contraseña')
+        
+            id = Administrador(cedulaAdministrador=cedulaAdministrador,nombreAdministrador=nombreAdministrador,AprellidoAdministrador=AprellidoAdministrador,telefonoAdministrador=telefonoAdministrador,contraseña=contraseña)
             db.session.commit()
-            return "Administrador editado correctamente", 200
+            return render_template("welcome.html")
         else:
             return "Administrador no encontrado", 404
     except Exception as e:

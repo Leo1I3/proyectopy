@@ -18,34 +18,42 @@
         <h2>Registro de Salidas</h2>
 
         <!-- Formulario para ingresar la fecha de salida -->
-        <form action="" method="post">
+        <form action="{{ url_for('salida_equipo.add') }}" method="post">
             
             <div class="form-group">
                 <label for="fechaSalida">Fecha de Salida:</label>
-                <input type="date" class="form-control" id="fechaSalida" name="fechasalida">
+                <input type="date" class="form-control" id="fechaSalida" name="fechaSalida">
             </div>
 
             <div class="form-group">
                 <label for="idSalida">ID de usuario:</label>
 
-                <select class="form-control" name="fidusuario">
+                <select class="form-control" name="idusuario">
                     <option value="">seleccione</option>
-                    {% for losusuarios in unusuario %}
-                        <option value="{{ losusuarios.id }}">{{ losusuarios.nombre }}</option>
+                    {% for usuario in data1 %}
+                        <option value="{{ usuario.idusuario }}">{{ usuario.nombre }}</option>
                     {% endfor %}
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="idEquipo">ID de administrador:</label>
-                <select class="form-control" id="idEquipo" name="fidAdministrador">
+                <select class="form-control" id="idEquipo" name="idAdministrador">
                     <option value="">seleccione</option>
-                    {% for losadministradores in administrador %}
-                        <option value="{{ losadministradores.idAdministrador }}">{{ losadministradores.idAdministrador }}</option>
+                    {% for administrador in data2 %}
+                        <option value="{{ administrador.idAdministrador }}">{{ administrador.nombreAdministrador }}</option>
                     {% endfor %}
                 </select>
             </div>
-
+            <div class="form-group">
+                <label for="idEquipo">ID de Equipo:</label>
+                <select class="form-control" name="idequipo">
+                    <option value="">seleccione</option>
+                    {% for equipo in data3 %}
+                        <option value="{{ equipo.idequipo }}">{{ equipo.codigoE }}</option>
+                    {% endfor %}
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary" name="faccion" value="insertar">Guardar</button>
         </form>
 
@@ -58,15 +66,17 @@
                     <th>Fecha de Salida</th>
                     <th>ID Usuario</th>
                     <th>ID Administrador</th>
+                    <th>codigo equipo</th>
                 </tr>
             </thead>
             <tbody>
-                {% for losprestamos in elprestamo %}
+                {% for salida_equipo in data %}
                     <tr>
-                        <td>{{ losprestamos.idSalida }}</td>
-                        <td>{{ losprestamos.fechaSalida }}</td>
-                        <td>{{ losprestamos.idusuario }}</td>
-                        <td>{{ losprestamos.idAdministrador }}</td>
+                        <td>{{ salida_equipo.idSalida }}</td>
+                        <td>{{ salida_equipo.fechaSalida }}</td>
+                        <td>{{ salida_equipo.usuario.nombre }}</td>
+                        <td>{{ salida_equipo.administrador.nombreAdministrador }}</td>
+                        <td>{{ salida_equipo.equipo.codigoE }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

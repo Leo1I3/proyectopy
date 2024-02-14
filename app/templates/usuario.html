@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>equipo</title>
+    <link rel="stylesheet" href="static/bootstrap-5.3.0-alpha1-dist/resources/css/app.css">
+    <script type="module" src="static/bootstrap-5.3.0-alpha1-dist/resources/js/app.js" defer></script>
+    <link rel="stylesheet" href="static/bootstrap-5.3.0-alpha1-dist/resources/css/Bienvenido.css">
+    <script type="module" src="static/bootstrap-5.3.0-alpha1-dist/resources/js/Bienvenido.js" defer></script>
+    
+</head>
+
+<body>
+    {% include 'partials/nav.html' %}
+
+    <div class="container divPrincipal mt-5">
+        <h1>Registro de usuarios </h1>
+
+        <form action="{{ url_for('usuario.add') }}" method="post">
+            
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="idEquipo" name="usuario">
+                <label for="marca">Nombre:</label>
+                <input type="text" class="form-control" id="marca" placeholder="Ingrese la marca" name="nombre">
+            </div>
+            <div class="form-group">
+                <label for="modelo">Correo:</label>
+                <input type="text" class="form-control" id="codigo" placeholder="Ingrese el codigo" name="correo">
+            </div>
+            <div class="form-group">
+                <label for="serial">cedula:</label>
+                <input type="text" class="form-control" id="color" placeholder="Ingrese el color" name="cedula">
+            </div>
+            <button type="submit" class="btn btn-primary" name="faccion" value="insertar">Registrar</button>
+        </form>
+
+        <h3>Lista de usuarios</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID usuario</th>
+                    <th>nombre</th>
+                    <th>correo</th>
+                    <th>cedula</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in data %}
+                    <form action="{{ url_for('usuario.delete', id=usuario.idusuario) }}" method="post"></form>
+                        <tr>
+                            <td>{{ usuario.idusuario }}</td>
+                            <td>{{ usuario.nombre }}</td>
+                            <td>{{ usuario.correo }}</td>
+                            <td>{{ usuario.cedula }}</td>
+                            <td>
+                                <button class="delete-button" >Eliminar</button>
+                            </td>
+                        </tr>
+                    </form>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

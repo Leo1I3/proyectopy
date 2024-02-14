@@ -18,7 +18,7 @@
         <h2>Registro de Entregas</h2>
 
         <!-- Formulario para ingresar la fecha de entrega, ID de salida y ID de equipo -->
-        <form action="" method="post">
+        <form action="{{ url_for('detalle_salida.add') }}" method="post">
             
             <div class="form-group">
                 <label for="fechaEntrega">Fecha de Entrega:</label>
@@ -26,26 +26,28 @@
             </div>
             <div class="form-group">
                 <label for="idSalida">ID de Salida:</label>
-                <select class="form-control" name="fidSalida">
+                <select class="form-control" name="idSalida">
                     <option value="">seleccione</option>
-                    {% for losprestamos in elprestamo %}
-                        <option value="{{ losprestamos.idSalida }}">{{ losprestamos.idSalida }}</option>
+                    {% for salida_equipo in data1 %}
+                        <option value="{{ salida_equipo.idSalida }}">{{ salida_equipo.idSalida }}</option>
                     {% endfor %}
                 </select>
             </div>
             <div class="form-group">
                 <label for="idEquipo">ID de Equipo:</label>
-                <select class="form-control" name="fidequipo">
+                <select class="form-control" name="idequipo">
                     <option value="">seleccione</option>
-                    {% for losequipo in elequipo %}
-                        <option value="{{ losequipo.idequipo }}">{{ losequipo.idequipo }}</option>
+                    {% for equipo in data2 %}
+                        <option value="{{ equipo.idequipo }}">{{ equipo.codigoE }}</option>
                     {% endfor %}
                 </select>
+            </div>
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="fechaEntrega" name="despE" value="0">
             </div>
             <br>
             <br>
             <button type="submit" class="btn btn-primary" name="faccion" value="insertar">Guardar</button>
-
         </form>
         <br>
         <br>
@@ -55,18 +57,18 @@
             <thead>
                 <tr>
                     <th>ID Entrega</th>
+                    <th>fecha de Devolucion</th>
                     <th>Fecha de Entrega</th>
-                    <th>ID de Salida</th>
-                    <th>ID de Equipo</th>
+                    <th>codigo de Equipo</th>
                 </tr>
             </thead>
             <tbody>
-                {% for devoluciones1 in devolucion1 %}
+                {% for detalle_salida in data %}
                     <tr>
-                        <td>{{ devoluciones1.idDetalleSalida }}</td>
-                        <td>{{ devoluciones1.fechaEntregaDetalleSalida }}</td>
-                        <td>{{ devoluciones1.idSalida }}</td>
-                        <td>{{ devoluciones1.idequipo }}</td>
+                        <td>{{ detalle_salida.idDetalleSalida }}</td>
+                        <td>{{ detalle_salida.fechaEntregaDetalleSalida }}</td>
+                        <td>{{ detalle_salida.salida_equipo.fechaSalida }}</td>
+                        <td>{{ detalle_salida.equipo.codigoE }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

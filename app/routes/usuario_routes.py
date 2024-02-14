@@ -1,6 +1,6 @@
-from flask import Blueprint, request, render_template
+from flask import Blueprint, request, render_template,url_for,redirect
 from app import db
-from app.models import Usuario
+from app.models.usuario import Usuario 
 
 bp = Blueprint('usuario', __name__)
 
@@ -12,14 +12,15 @@ def index():
 @bp.route('/usuario/add', methods=['POST'])
 def add():
     try:
-        data = request.get_json()
-        new_usuario = Usuario(
-            nombre=data['nombre'],
-            contraseña=data['contraseña']
-        )
+        nombre=request.form.get('nombre')
+        correo=request.form.get('correo')
+        cedula=request.form.get('cedula')
+        
+
+        new_usuario = Usuario(nombre=nombre,correo=correo,cedula=cedula)
         db.session.add(new_usuario)
         db.session.commit()
-        return "Usuario agregado correctamente", 201
+        return redirect(url_for('usuario.index'))
     except Exception as e:
         db.session.rollback()
         return f"Error al agregar usuario: {str(e)}", 500
@@ -27,27 +28,30 @@ def add():
 @bp.route('/usuario/edit/<int:id>', methods=['PUT'])
 def edit(id):
     try:
-        data = request.get_json()
         usuario = db.session.query(Usuario).get(id)
         if usuario:
-            usuario.nombre = data['nombre']
-            usuario.contraseña = data['contraseña']
+            nombre=request.form.get('nombre')
+            correo=request.form.get('correo')
+            cedula=request.form.get('cedula')
+        
+
+            id = usuario(nombre=nombre,correo=correo,cedula=cedula)
             db.session.commit()
-            return "Usuario editado correctamente", 200
+            return redirect(url_for('usuario.index'))
         else:
             return "Usuario no encontrado", 404
     except Exception as e:
         db.session.rollback()
         return f"Error al editar usuario: {str(e)}", 500
 
-@bp.route('/usuario/delete/<int:id>', methods=['DELETE'])
+@bp.route('/usuario/delete/<int:id>', methods=['POST'])
 def delete(id):
     try:
-        usuario = db.session.query(Usuario).get(id)
+        usuario = Usuario.query.get_or_404(id)
         if usuario:
             db.session.delete(usuario)
             db.session.commit()
-            return "Usuario eliminado correctamente", 200
+            return redirect(url_for('usuario.index'))
         else:
             return "Usuario no encontrado", 404
     except Exception as e:

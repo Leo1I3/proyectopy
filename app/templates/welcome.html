@@ -8,7 +8,10 @@
     <!-- Aquí puedes cargar tus archivos estáticos usando Flask, asegúrate de tener la estructura de carpetas correcta -->
     <link rel="stylesheet" href="static/bootstrap-5.3.0-alpha1-dist/resources/css/Bienvenido.css">
 </head>
+<style>
 
+    *{box-sizing: border-box;}
+</style>
 <body>
     <center>
         <div>
@@ -34,13 +37,13 @@
                                 <div class="card-front">
                                     <div class="center-wrap">
                                         <div class="section text-center">
-                                            <form action="{{ url_for('equipo.index') }}" method="POST">
+                                            <form action="{{ url_for('session.login') }}" method="POST">
                                                 
                                                 <h4 class="mb-4 pb-3">Bienvenido, Inicie Sesión</h4>
 
                                                 <div class="form-group">
-                                                    <input type="email" name="correo" class="form-style"
-                                                        placeholder="Ingresa tu Correo" id="Correo"
+                                                    <input type="text" name="nombreAdministrador" class="form-style"
+                                                        placeholder="Ingresa tu nombre" id="Correo"
                                                         autocomplete="off">
                                                     <i class="input-icon uil uil-at"><img
                                                             src="static/bootstrap-5.3.0-alpha1-dist/public/imagenes/correo.png"
@@ -51,7 +54,7 @@
                                                 {% endif %}
 
                                                 <div class="form-group mt-2">
-                                                    <input type="password" name="contrasena" class="form-style"
+                                                    <input type="password" name="contraseña" class="form-style"
                                                         placeholder="Ingresa tu contraseña" id="contrasena"
                                                         autocomplete="off">
                                                     <i class="input-icon uil uil-lock-alt"><img
@@ -68,38 +71,35 @@
                                 <div class="card-back">
                                     <div class="center-wrap">
                                         <div class="section text-center">
-                                            <form action="{}" method="post">
-                                                
-                                                <h4 class="mb-4 pb-3">Registre su Usuario</h4>
-                                                <div class="form-group">
-                                                    <input type="text" name="nombre" class="form-style"
-                                                        placeholder="Ingresa tu Nombre" id="nombre"
-                                                        autocomplete="off">
-                                                    <i class="input-icon uil uil-user"><img
-                                                            src="static/bootstrap-5.3.0-alpha1-dist/public/imagenes/usuario.png"
-                                                            alt="" style="width: 33px; height: 38px;"></i>
+                                            <form action="{{ url_for('administrador.add') }}" method="post">
+                                                <h4 class="mb-4 pb-3">Registro de administrador</h4>
+                                                <div class="form-group mt-2">
+                                                    <input type="hidden" name="idAdministrador" class="form-style" placeholder="Ingrese su ID" autocomplete="off">
+                                                    <input type="text" name="cedulaAdministrador" class="form-style" placeholder="Ingrese su Cédula" autocomplete="off">
+                                                    <i class="input-icon uil uil-at"><img src="static/bootstrap-5.3.0-alpha1-dist/public/imagenes/correo.png" alt="" style="width: 33px; height: 38px;"></i>
                                                 </div>
                                                 <div class="form-group mt-2">
-                                                    <input type="email" name="correo" class="form-style"
-                                                        placeholder="Ingresa tu Correo" id="Correo"
-                                                        autocomplete="off">
-                                                    <i class="input-icon uil uil-at"><img
-                                                            src="static/bootstrap-5.3.0-alpha1-dist/public/imagenes/correo.png"
-                                                            alt="" style="width: 33px; height: 38px;"></i>
+                                                    <input type="text" name="nombreAdministrador" class="form-style" placeholder="Ingrese su Nombre" autocomplete="off">
+                                                    <i class="input-icon uil uil-user"><img src="static/bootstrap-5.3.0-alpha1-dist/public/imagenes/usuario.png" alt="" style="width: 33px; height: 38px;"></i>
                                                 </div>
                                                 <div class="form-group mt-2">
-                                                    <input type="password" name="contraseña" class="form-style"
-                                                        placeholder="Ingresa una Contraseña" id="contrasena"
-                                                        autocomplete="off">
-                                                    <i class="input-icon uil uil-lock-alt"><img
-                                                            src="static/bootstrap-5.3.0-alpha1-dist/public/imagenes/contrasena.png"
-                                                            alt="" style="width: 33px; height: 38px;"></i>
+                                                    <input type="text" name="aprellidoAdministrador" class="form-style" placeholder="Ingrese su Apellido" autocomplete="off">
+                                                    <i class="input-icon uil uil-user"><img src="static/bootstrap-5.3.0-alpha1-dist/public/imagenes/usuario.png" alt="" style="width: 33px; height: 38px;"></i>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">Regístrese</button>
+                                                <div class="form-group mt-2">
+                                                    <input type="text" name="telefonoAdministrador" class="form-style" placeholder="Ingrese su Teléfono" autocomplete="off">
+                                                    <i class="input-icon uil uil-phone"><img src="static/bootstrap-5.3.0-alpha1-dist/public/imagenes/telefono.png" alt="" style="width: 33px; height: 38px;"></i>
+                                                </div>
+                                                <div class="form-group mt-2">
+                                                    <input type="password" name="contraseña" class="form-style" placeholder="Ingrese una Contraseña" autocomplete="off">
+                                                    <i class="input-icon uil uil-lock-alt"><img src="static/bootstrap-5.3.0-alpha1-dist/public/imagenes/contrasena.png" alt="" style="width: 33px; height: 38px;"></i>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Registrarse</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>

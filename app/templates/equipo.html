@@ -63,6 +63,7 @@
             </thead>
             <tbody>
                 {% for equipo in data %}
+                <form action="{{ url_for('equipo.delete', id=equipo.idequipo) }}" method="post">
                     <tr>
                         <td>{{ equipo.idequipo }}</td>
                         <td>{{ equipo.marcaE }}</td>
@@ -76,8 +77,12 @@
                                 No prestado
                             {% endif %}
                         </td>
+                        <td>
+                            <button class="delete-button" >Eliminar</button>
+                        </td>
                     </tr>
-                {% endfor %}
+                </form>
+            {% endfor %}
             </tbody>
         </table>
     </div>
