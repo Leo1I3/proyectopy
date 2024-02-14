@@ -34,7 +34,6 @@ def edit(id):
             correo=request.form.get('correo')
             cedula=request.form.get('cedula')
         
-
             id = usuario(nombre=nombre,correo=correo,cedula=cedula)
             db.session.commit()
             return redirect(url_for('usuario.index'))

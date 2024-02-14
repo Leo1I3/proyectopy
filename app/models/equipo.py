@@ -9,3 +9,4 @@ class Equipo(db.Model):
     colorE = db.Column(db.String(45))
     despE = db.Column(db.String(45))
     estadoE = db.Column(db.Boolean)
+    salida = db.relationship('SalidaEquipo')

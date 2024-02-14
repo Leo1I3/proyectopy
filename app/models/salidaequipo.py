@@ -7,6 +7,7 @@ class SalidaEquipo(db.Model):
     idusuario = db.Column(db.Integer, db.ForeignKey('usuario.idusuario'))
     idAdministrador = db.Column(db.Integer, db.ForeignKey('administrador.idAdministrador'))
     idequipo = db.Column(db.Integer, db.ForeignKey('equipo.idequipo'))
-    administrador = db.relationship("Administrador")
-    usuario = db.relationship("Usuario")
-    equipo = db.relationship("Equipo")
+    usuario = db.relationship('Usuario')
+    administrador = db.relationship('Administrador')
+    equipo = db.relationship('Equipo')
+

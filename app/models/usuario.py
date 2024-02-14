@@ -7,3 +7,4 @@ class Usuario(db.Model):
     nombre = db.Column(db.String(45))
     correo = db.Column(db.String(45))
     cedula = db.Column(db.String(45))
+    salida = db.relationship('SalidaEquipo', lazy='dynamic')

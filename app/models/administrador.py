@@ -9,17 +9,7 @@ class Administrador(db.Model,UserMixin):
     AprellidoAdministrador = db.Column(db.String(45))
     telefonoAdministrador = db.Column(db.String(45))
     contraseña = db.Column(db.String(45))
-
-
+    salida = db.relationship('SalidaEquipo')
 
     def get_id(self):
         return self.idAdministrador
-
-
-
-
-
-
-
-    
-
